@@ -1,0 +1,18 @@
+version: "3.9"
+networks:
+  default:
+    name: "mattermost-apps-dev"
+services:
+  mattermost-apps-typescript-hello-world:
+    image: "node:lts-gallium"
+    restart: "unless-stopped"
+    working_dir: "/app"
+    ports:
+      - "4000:4000"
+    environment:
+      MATTERMOST_SITEURL: "http://mattermost:8065"
+      APP_HOST: "mattermost-apps-typescript-hello-world" # Same as the service's network name
+      APP_PORT: 4000
+    volumes:
+      - "./:/app"
+    command: "bash -c 'npm i && npm start'"

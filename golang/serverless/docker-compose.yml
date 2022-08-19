@@ -1,0 +1,18 @@
+version: "3.9"
+networks:
+  default:
+    name: "mattermost-apps-dev"
+services:
+  mattermost-apps-golang-serverless:
+    image: "golang:latest"
+    restart: "unless-stopped"
+    working_dir: "/app/http"
+    ports:
+      - "8080:8080"
+    environment:
+      MATTERMOST_SITEURL: "http://mattermost:8065"
+      APP_HOST: "mattermost-apps-golang-serverless" # Same as the service's network name
+      APP_PORT: 8080
+    volumes:
+      - "./:/app"
+    command: "bash -c 'go run . --manifest=../manifest.json --static=../static'"
