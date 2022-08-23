@@ -1,0 +1,18 @@
+version: "3.9"
+networks:
+  default:
+    name: "mattermost-apps-dev"
+services:
+  mattermost-apps-python-hello-world:
+    image: "python:latest"
+    restart: "unless-stopped"
+    working_dir: "/app"
+    ports:
+      - "8090:8090"
+    environment:
+      MATTERMOST_SITEURL: "http://mattermost:8065"
+      APP_HOST: "mattermost-apps-python-hello-world" # Same as the service's network name
+      APP_PORT: 8090
+    volumes:
+      - "./:/app"
+    command: "bash -c 'pip3 install -r requirements.txt && cd src && python3 hello-world.py'"
