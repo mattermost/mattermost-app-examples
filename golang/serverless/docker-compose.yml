@@ -6,7 +6,7 @@ services:
   mattermost-apps-golang-serverless:
     image: "golang:latest"
     restart: "unless-stopped"
-    working_dir: "/app/http"
+    working_dir: "/app/"
     ports:
       - "8080:8080"
     environment:
@@ -15,4 +15,4 @@ services:
       APP_PORT: 8080
     volumes:
       - "./:/app"
-    command: "bash -c 'go run . --manifest=../manifest.json --static=../static'"
+    command: "bash -c 'make run'"
