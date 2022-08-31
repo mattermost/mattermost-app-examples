@@ -101,7 +101,7 @@ var SendForm = apps.Form{
 	Fields: []apps.Field{
 		{
 			Type: "text",
-			Name: "message",
+			Name: "Message",
 		},
 	},
 	Submit: apps.NewCall("/send").WithExpand(apps.Expand{ActingUserAccessToken: apps.ExpandAll}),
@@ -135,7 +135,7 @@ func Send(w http.ResponseWriter, req *http.Request) {
 	json.NewDecoder(req.Body).Decode(&c)
 
 	message := "Hello, world!"
-	v, ok := c.Values["message"]
+	v, ok := c.Values["Message"]
 	if ok && v != nil {
 		message += fmt.Sprintf(" ...and %s!", v)
 	}
