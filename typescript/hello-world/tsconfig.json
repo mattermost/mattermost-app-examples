@@ -18,7 +18,10 @@
       ],
       "resolveJsonModule": true,
       "esModuleInterop": true,
-      "skipLibCheck": true
+      "skipLibCheck": true,
+      "paths": {
+            "@mattermost/types/*": ["node_modules/@mattermost/types/lib/*"]
+      }
     },
     "include": [
       "./src",
