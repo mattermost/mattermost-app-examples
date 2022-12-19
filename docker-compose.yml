@@ -4,7 +4,7 @@ networks:
     name: "mattermost-apps-dev"
 services:
   mattermost:
-    image: "mattermost/mattermost-enterprise-edition:7.2" # https://hub.docker.com/r/mattermost/mattermost-enterprise-edition/tags
+    image: "mattermost/mattermost-enterprise-edition:7.4.0" # https://hub.docker.com/r/mattermost/mattermost-enterprise-edition/tags
     restart: "unless-stopped"
     depends_on:
       - "db"
@@ -28,7 +28,7 @@ services:
       MM_LOGSETTINGS_FILELEVEL: "DEBUG"
       MM_FILESETTINGS_MAXFILESIZE: 123524266
       MM_FEATUREFLAGS_AppsEnabled: "true"
-      MM_FEATUREFLAGS_PluginApps: "1.1.0" # https://github.com/mattermost/mattermost-plugin-apps/releases
+      MM_FEATUREFLAGS_PluginApps: "1.2.0" # https://github.com/mattermost/mattermost-plugin-apps/releases
     volumes:
       - "./mm-logs:/mattermost/logs:rw"
   db:
