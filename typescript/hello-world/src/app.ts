@@ -6,11 +6,11 @@ import express from 'express';
 // Shim for mattermost-redux global fetch access
 global.fetch = require('node-fetch');
 
-import {AppBinding, AppCallRequest, AppCallResponse, AppForm, AppManifest} from 'mattermost-redux/types/apps';
-import {Post} from 'mattermost-redux/types/posts';
-import {Channel} from 'mattermost-redux/types/channels';
+import {AppBinding, AppCallRequest, AppCallResponse, AppForm, AppManifest} from '@mattermost/types/lib/apps';
+import {Post} from '@mattermost/types/lib/posts';
+import {Channel} from '@mattermost/types/lib/channels';
 
-import Client4 from 'mattermost-redux/client/client4';
+import {Client4} from '@mattermost/client';
 
 const host = process.env.APP_HOST || 'localhost';
 const port = process.env.APP_PORT || 4000;
@@ -169,7 +169,7 @@ app.post('/submit', async (req, res) => {
 
     const callResponse: AppCallResponse = {
         type: 'ok',
-        markdown: 'Created a post in your DM channel.',
+        text: 'Created a post in your DM channel.',
     };
 
     res.json(callResponse);
