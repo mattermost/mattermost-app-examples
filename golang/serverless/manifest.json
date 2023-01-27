@@ -1,6 +1,6 @@
 {
 	"app_id": "hello-serverless",
-	"version": "v1.1.0",
+	"version": "v1.2.0",
 	"display_name": "Hello, Serverless!",
 	"homepage_url": "https://github.com/mattermost/mattermost-app-examples/golang/serverless",
 	"requested_permissions": [

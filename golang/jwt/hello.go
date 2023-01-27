@@ -22,7 +22,7 @@ var iconData []byte
 
 var manifest = apps.Manifest{
 	AppID:       "hello-jwt",
-	Version:     "v1.1.0",
+	Version:     "v1.2.0",
 	DisplayName: "Hello, JWT!",
 	Icon:        "icon.png",
 	HomepageURL: "https://github.com/mattermost/mattermost-app-examples/golang/jwt",
