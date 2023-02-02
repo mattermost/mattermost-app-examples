@@ -80,6 +80,8 @@ func main() {
 
 	http.HandleFunc("/install", respondWithMessage("Thanks for installing me!"))
 
+	http.HandleFunc("/version_changed", respondWithMessage("I got updated!"))
+
 	http.HandleFunc("/uninstall", respondWithMessage("No, don't uninstall me!"))
 
 	http.HandleFunc("/enable", respondWithMessage("I'm back up again"))
