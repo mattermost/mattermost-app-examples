@@ -11,19 +11,71 @@ import (
 	"github.com/mattermost/mattermost-plugin-apps/utils/httputils"
 )
 
-//go:embed manifest.json
-var manifestData []byte
+//go:embed icon.png
+var iconData []byte
 
 const (
 	host = "mattermost-apps-golang-lifecycle"
 	port = 8083
 )
 
-func main() {
-	// Serve its own manifest as HTTP for convenience in dev. mode.
-	http.HandleFunc("/manifest.json", httputils.DoHandleJSONData(manifestData))
+var (
+	rootURL = fmt.Sprintf("http://%s:%d", host, port)
+)
 
-	// Returns the Channel Header and Command bindings for the app.
+var Manifest = apps.Manifest{
+	AppID:       "hello-lifecycle",
+	Version:     "v1.2.0",
+	DisplayName: "Hello, Lifecycle!",
+	HomepageURL: "https://github.com/mattermost/mattermost-app-examples/golang/lifecycle",
+	Icon:        "icon.png",
+	OnInstall: &apps.Call{
+		Path: "/install",
+		Expand: &apps.Expand{
+			ActingUser: apps.ExpandID,
+		},
+	},
+	OnVersionChanged: &apps.Call{
+		Path: "/version_changed",
+		Expand: &apps.Expand{
+			ActingUser: apps.ExpandID,
+		},
+	},
+	OnUninstall: &apps.Call{
+		Path: "/uninstall",
+		Expand: &apps.Expand{
+			ActingUser: apps.ExpandID,
+		},
+	},
+	OnEnable: &apps.Call{
+		Path: "/enable",
+		Expand: &apps.Expand{
+			ActingUser: apps.ExpandID,
+		},
+	},
+	OnDisable: &apps.Call{
+		Path: "/disable",
+		Expand: &apps.Expand{
+			ActingUser: apps.ExpandID,
+		},
+	},
+	RequestedPermissions: []apps.Permission{
+		apps.PermissionActAsBot,
+	},
+	Deploy: apps.Deploy{
+		HTTP: &apps.HTTP{
+			RootURL: rootURL,
+		},
+	},
+}
+
+func main() {
+	http.HandleFunc("/manifest.json",
+		httputils.DoHandleJSON(Manifest))
+
+	http.HandleFunc("/static/icon.png",
+		httputils.DoHandleData("image/png", iconData))
+
 	http.HandleFunc("/bindings", httputils.DoHandleJSONData([]byte("{}")))
 
 	http.HandleFunc("/install", respondWithMessage("Thanks for installing me!"))
@@ -35,7 +87,6 @@ func main() {
 	http.HandleFunc("/disable", respondWithMessage("Taking a little nap"))
 
 	addr := fmt.Sprintf(":%v", port)
-	rootURL := fmt.Sprintf("http://%v:%v", "mattermost-apps-golang-lifecycle", port)
 	fmt.Printf("hello-lifecycle app listening on %q \n", addr)
 	fmt.Printf("Install via /apps install http %s/manifest.json \n", rootURL)
 	panic(http.ListenAndServe(addr, nil))
