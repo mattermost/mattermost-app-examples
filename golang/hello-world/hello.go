@@ -104,7 +104,10 @@ var SendForm = apps.Form{
 			Name: "Message",
 		},
 	},
-	Submit: apps.NewCall("/send").WithExpand(apps.Expand{ActingUserAccessToken: apps.ExpandAll}),
+	Submit: apps.NewCall("/send").WithExpand(apps.Expand{
+		ActingUserAccessToken: apps.ExpandAll,
+		ActingUser:            apps.ExpandID,
+	}),
 }
 
 // main sets up the http server, with paths mapped for the static assets, the
