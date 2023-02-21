@@ -8,8 +8,9 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "@mattermost/client": "7.4.0",
+    "@mattermost/types": "7.4.0",
     "express": "4.17.1",
-    "mattermost-redux": "5.33.1",
     "node-fetch": "2.6.1"
   },
   "devDependencies": {

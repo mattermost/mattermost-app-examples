@@ -26,7 +26,7 @@ var Manifest = apps.Manifest{
 	AppID: "hello-world",
 
 	// App's release/version.
-	Version: "v1.1.0",
+	Version: "v1.2.0",
 
 	// A (long) display name for the app.
 	DisplayName: "Hello, world!",
@@ -104,7 +104,10 @@ var SendForm = apps.Form{
 			Name: "Message",
 		},
 	},
-	Submit: apps.NewCall("/send").WithExpand(apps.Expand{ActingUserAccessToken: apps.ExpandAll}),
+	Submit: apps.NewCall("/send").WithExpand(apps.Expand{
+		ActingUserAccessToken: apps.ExpandAll,
+		ActingUser:            apps.ExpandID,
+	}),
 }
 
 // main sets up the http server, with paths mapped for the static assets, the
