@@ -41,6 +41,9 @@ const manifest = {
     homepage_url: 'https://github.com/mattermost/mattermost-app-examples/typescript/hello-world',
     app_type: 'http',
     icon: 'icon.png',
+    http: {
+            root_url: `http://${host}:${port}`
+    },
     root_url: `http://${host}:${port}`,
     requested_permissions: [
         'act_as_bot',
