@@ -64,6 +64,10 @@ const form: AppForm = {
     ],
     submit: {
         path: '/submit',
+        expand: {
+            acting_user: "all",
+            acting_user_access_token: "all"
+        }
     },
 };
 
