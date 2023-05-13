@@ -51,7 +51,9 @@ def manifest() -> dict:
             '/channel_header',
             '/command'
         ],
-        'root_url': os.environ.get('ROOT_URL', default_root_url),
+        'http': {
+	        'root_url': os.environ.get('ROOT_URL', default_root_url),
+		},
     }
 
 
