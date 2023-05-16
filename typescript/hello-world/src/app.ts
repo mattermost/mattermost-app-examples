@@ -44,7 +44,6 @@ const manifest = {
     http: {
             root_url: `http://${host}:${port}`
     },
-    root_url: `http://${host}:${port}`,
     requested_permissions: [
         'act_as_bot',
     ],
